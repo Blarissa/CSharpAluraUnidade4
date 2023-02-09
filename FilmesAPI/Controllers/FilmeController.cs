@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FilmesAPI.Controllers
 {
@@ -15,23 +14,39 @@ namespace FilmesAPI.Controllers
         private static int id = 1;
 
         [HttpPost]
-        public void AdicionaFilme([FromBody]Filme filme)
+        public IActionResult AdicionaFilme([FromBody]Filme filme)
         {
             filme.Id = id++;
             filmes.Add(filme);
             Console.WriteLine(filme.Titulo);
+
+            //mostra status da requisição e onde recurso foi criado
+            //
+            //created action está falando qual é o caminho, qual é a ação que criou este recurso
+            //
+            //Parâmetros
+            //
+            //nome da action => nameof(RecuperaFilmesPorId)
+            //valor da rota  => new { id = filme.Id}
+            //recurso        => filme
+            return CreatedAtAction(nameof(RecuperaFilmesPorId), new { id = filme.Id}, filme);
         }
 
         [HttpGet]
-        public IEnumerable<Filme> RecuperarFilmes()
+        public IActionResult RecuperarFilmes()
         {
-            return filmes;
+            return Ok(filmes);
         }
         
         [HttpGet("{id}")]
-        public Filme RecuperaFilmesPorId(int id)
+        public IActionResult RecuperaFilmesPorId(int id)
         {
-            return filmes.FirstOrDefault(filme => filme.Id == id);
+            Filme filme =  filmes.FirstOrDefault(filme => filme.Id == id);
+
+            if (filme != null)
+                return Ok(filme);
+
+            return NotFound();        
         }
     }
 }
