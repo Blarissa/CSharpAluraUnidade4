@@ -10,6 +10,11 @@
 
 ## :heavy_check_mark: API Rest com .NET 5
 ### Operações essenciais com verbos HTTP
+- Por que APIs? 
+- Construindo a API
+- Retornando dados
+- Conexão entre Banco e API
+- Melhorando o código
 
 ## ASP.NET Core 
 ### Um e-Commerce com MVC e EF Core
