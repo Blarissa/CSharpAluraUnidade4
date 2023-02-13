@@ -5,7 +5,7 @@
 - O que são Microsserviços?
 - Novidades do .NET 5
 
-## Swagger
+## :heavy_check_mark: Swagger
 ### Documentando suas APIs
 
 ## :heavy_check_mark: API Rest com .NET 5
