@@ -4,44 +4,42 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace FilmesAPI.Migrations
+#nullable disable
+
+namespace FilmesAPI.Migrations;
+
+[DbContext(typeof(FilmeContext))]
+partial class FilmeContextModelSnapshot : ModelSnapshot
 {
-    [DbContext(typeof(FilmeContext))]
-    partial class FilmeContextModelSnapshot : ModelSnapshot
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.17");
+        modelBuilder
+            .HasAnnotation("ProductVersion", "6.0.14")
+            .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("FilmesAPI.Models.Filme", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+        modelBuilder.Entity("FilmesAPI.Models.Filme", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int");
 
-                    b.Property<string>("Diretor")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.Property<int>("Duracao")
+                    .HasColumnType("int");
 
-                    b.Property<int>("Duracao")
-                        .HasColumnType("int");
+                b.Property<string>("Genero")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnType("varchar(50)");
 
-                    b.Property<string>("Genero")
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                b.Property<string>("Titulo")
+                    .IsRequired()
+                    .HasColumnType("longtext");
 
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasColumnType("text");
+                b.HasKey("Id");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Filmes");
-                });
+                b.ToTable("Filmes");
+            });
 #pragma warning restore 612, 618
-        }
     }
 }

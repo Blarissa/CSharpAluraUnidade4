@@ -5,18 +5,20 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace FilmesAPI.Migrations
 {
     [DbContext(typeof(FilmeContext))]
-    [Migration("20230213051528_filme")]
-    partial class filme
+    [Migration("20230215204918_CriandoTabelaDeFilme")]
+    partial class CriandoTabelaDeFilme
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 64)
-                .HasAnnotation("ProductVersion", "5.0.17");
+                .HasAnnotation("ProductVersion", "6.0.14")
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("FilmesAPI.Models.Filme", b =>
                 {
@@ -24,20 +26,17 @@ namespace FilmesAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Diretor")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("Duracao")
                         .HasColumnType("int");
 
                     b.Property<string>("Genero")
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
