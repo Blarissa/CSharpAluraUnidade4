@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Web
 {
-    public class Relatorio
+    public class Relatorio : IRelatorio
     {
-        private readonly Catalogo catalogo;
+        private readonly ICatalogo catalogo;
 
-        public Relatorio(Catalogo catalogo)
+        public Relatorio(ICatalogo catalogo)
         {
             this.catalogo = catalogo;
         }
@@ -22,8 +22,7 @@ namespace Web
                 await context.Response.WriteAsync(
                     $"{livro.Codigo,-10} " +
                     $"{livro.Nome,-40} " +
-                    $"{livro.Preco,10:C}\r\n");
-            
+                    $"{livro.Preco,10:C}\r\n");            
         }
     }
 }

@@ -42,21 +42,13 @@ namespace Web
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
+            ICatalogo catalogo = new Catalogo();
+            IRelatorio relatorio = new Relatorio(catalogo);
 
-            app.UseMvc(routes =>
+            app.Run(async (context) =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                await relatorio.Imprimir(context);                
             });
         }
     }
