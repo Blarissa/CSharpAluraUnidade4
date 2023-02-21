@@ -52,7 +52,7 @@ namespace CasaDoCodigo
                     template: "{controller=Pedido}/{action=Carrossel}/{id?}");
             });
 
-            serviceProvider.GetService<ApplicationContext>().Database.EnsureCreated();
+            serviceProvider.GetService<ApplicationContext>().Database.Migrate();
         }
     }
 }
