@@ -7,15 +7,10 @@ using System.Threading.Tasks;
 
 namespace CasaDoCodigo.Repositories
 {
-    public class ProdutoRepository : IProdutoRepository
-    {
-        private readonly ApplicationContext context;
-        private readonly DbSet<Produto> dbSet;
-
-        public ProdutoRepository(ApplicationContext context)
+    public class ProdutoRepository : BaseRepository<Produto>, IProdutoRepository
+    {     
+        public ProdutoRepository(ApplicationContext contexto) : base(contexto)
         {
-            this.context = context;
-            dbSet = context.Set<Produto>();
         }
 
         public IList<Produto> GetProdutos()
@@ -29,7 +24,7 @@ namespace CasaDoCodigo.Repositories
                 if (!dbSet.Where(p => p.Codigo == livro.Codigo).Any())
                     dbSet.Add(new Produto(livro.Codigo, livro.Nome, livro.Preco));            
 
-            context.SaveChanges();
+            contexto.SaveChanges();
         }
     }
 
