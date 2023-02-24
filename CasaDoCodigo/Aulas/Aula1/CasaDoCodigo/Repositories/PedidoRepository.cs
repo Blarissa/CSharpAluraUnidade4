@@ -1,5 +1,6 @@
 ﻿using CasaDoCodigo.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,24 +21,25 @@ namespace CasaDoCodigo.Repositories
         public void AddItem(string codigo)
         {
             var produto = contexto.Set<Produto>()
-                          .Where(p => p.Codigo == codigo)
-                          .SingleOrDefault();
+                            .Where(p => p.Codigo == codigo)
+                            .SingleOrDefault();
 
-            if (produto == null)
-                throw new ArgumentException("Produto não encontrado!");
+            if (produto == null)            
+                throw new ArgumentException("Produto não encontrado");
+            
 
             var pedido = GetPedido();
 
             var itemPedido = contexto.Set<ItemPedido>()
-                             .Where(i => i.Produto.Codigo == produto.Codigo
-                                && i.Pedido.Id == pedido.Id)
-                             .SingleOrDefault();
+                                .Where(i => i.Produto.Codigo == codigo
+                                        && i.Pedido.Id == pedido.Id)
+                                .SingleOrDefault();
 
             if (itemPedido == null)
             {
                 itemPedido = new ItemPedido(pedido, produto, 1, produto.Preco);
                 contexto.Set<ItemPedido>()
-                                .Add(itemPedido);
+                    .Add(itemPedido);
 
                 contexto.SaveChanges();
             }
@@ -46,11 +48,14 @@ namespace CasaDoCodigo.Repositories
         public Pedido GetPedido()
         {
             var pedidoId = GetPedidoId();
-            var pedido = dbSet
-                .Where(p => p.Id == pedidoId)
-                .SingleOrDefault();
 
-            if(pedido == null)
+            var pedido = dbSet
+                        .Include(p => p.Itens)
+                            .ThenInclude(i => i.Produto)
+                        .Where(p => p.Id == pedidoId)
+                        .SingleOrDefault();
+
+            if (pedido == null)
             {
                 pedido = new Pedido();
                 dbSet.Add(pedido);
