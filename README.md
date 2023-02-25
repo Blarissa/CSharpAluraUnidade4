@@ -7,10 +7,15 @@
 
 ## :heavy_check_mark: Swagger
 ### Documentando suas APIs
+- Conhecendo a ferramenta Ver primeiro vídeo
+- Definindo a API
+- Definindo endpoints
+- Schemas
+- Segurança
+- Infra própria
 
 ## :heavy_check_mark: .NET 6
 ### criando uma web API
-
 - Entendendo o conceito 
 - Iniciando o projeto .NET 6
 - Consultando e paginando
