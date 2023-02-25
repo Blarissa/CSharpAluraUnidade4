@@ -20,6 +20,17 @@
 
 ## ASP.NET Core 
 ### Um e-Commerce com MVC e EF Core
+- Criando Uma Aplicação com ASP.NET Core Ver primeiro vídeo
+- Criando o Projeto ASP NET Core MVC
+- Banco de Dados
+- Exibindo o Catálogo de Produtos
+- Trabalhando com Session
+- Carrinho e Resumo
+- Implementando a Chamada AJAX Ver primeiro vídeo
+- Alterando a Quantidade de Itens
+- Adicionando e Removendo Itens
+- Validando e Enviando Formulário de Cadastro
+- Recebendo e Gravando Dados de Cadastro
 
 ## Microsserviços
 ### Padrões de projeto
@@ -30,7 +41,7 @@
 - Operações
 
 ### Entendendo a tomada de decisões
-- Boas-vindas à realidade Ver primeiro vídeo
+- Boas-vindas à realidade
 - O início de tudo
 - Infraestrutura
 - Build e Deploy
